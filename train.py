@@ -9,7 +9,7 @@ bookkeeping that makes gradient descent stable and fits in a 2 GB GPU.
 Presets (the "ladder", see README) — same code, different numbers only:
     --preset debug   ~74k params    ~1 min    proves the pipeline works
     --preset small   ~0.44M params  ~10 min   middle of the ladder
-    --preset full    ~10.7M params  ~2 h      the real run
+    --preset full    ~10.7M params  ~40 min   the real run (v2: dropout 0.1, 1500 steps)
 
 Useful overrides:
     python train.py --preset full --micro-batch 8 --grad-accum 8   (if CUDA OOM)
@@ -42,13 +42,16 @@ DATA_DIR = os.path.join(HERE, "data", "shakespeare")
 PRESETS = {
     "debug": dict(n_layer=1, n_head=4, n_embd=64, block_size=256,
                   micro_batch=32, grad_accum=1, max_iters=500, warmup_iters=20,
-                  eval_interval=100, eval_iters=20, lr=1e-3),
+                  eval_interval=100, eval_iters=20, lr=1e-3, dropout=0.0),
     "small": dict(n_layer=2, n_head=4, n_embd=128, block_size=256,
                   micro_batch=32, grad_accum=2, max_iters=2000, warmup_iters=50,
-                  eval_interval=200, eval_iters=20, lr=1e-3),
+                  eval_interval=200, eval_iters=20, lr=1e-3, dropout=0.0),
+    # the "v2 recipe": the v1 run (train_full.log) overfit by iter ~1000, so we
+    # (a) regularize with dropout and (b) end the schedule near where v1's val
+    # loss peaked, instead of decaying the LR pointlessly for 4000 iters.
     "full": dict(n_layer=6, n_head=6, n_embd=384, block_size=256,
-                 micro_batch=12, grad_accum=5, max_iters=4000, warmup_iters=100,
-                 eval_interval=250, eval_iters=20, lr=1e-3),
+                 micro_batch=12, grad_accum=5, max_iters=1500, warmup_iters=100,
+                 eval_interval=100, eval_iters=20, lr=1e-3, dropout=0.1),
 }
 
 
@@ -157,6 +160,7 @@ def main():
     p.add_argument("--eval-interval", type=int, dest="eval_interval")
     p.add_argument("--eval-iters", type=int, dest="eval_iters")
     p.add_argument("--lr", type=float)
+    p.add_argument("--dropout", type=float)
     p.add_argument("--device", default=None)
     p.add_argument("--resume", action="store_true")
     args = p.parse_args()
@@ -183,6 +187,7 @@ def main():
         n_layer=cfg["n_layer"],
         n_head=cfg["n_head"],
         n_embd=cfg["n_embd"],
+        dropout=cfg.get("dropout", 0.0),
     )
     model = GPT(model_cfg).to(device)
     print(

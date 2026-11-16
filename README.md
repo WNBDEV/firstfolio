@@ -55,7 +55,11 @@ inside, so `sample.py` can rebuild the model from the file alone.
 |---|---|---|---|---|
 | debug  | ~74k   | ~1 min   | ~1.8 | Shakespeare-*shaped* words, no syntax |
 | small  | ~0.44M | ~10 min  | ~1.6 | real words, occasional phrases |
-| full   | ~10.7M | ~2 h     | ~1.5 | recognizable dialogue, names, structure |
+| full   | ~10.7M | ~40 min  | ~1.5 | recognizable dialogue, names, structure |
+
+The full preset is the "v2 recipe": dropout 0.1 with the schedule ending at
+1500 steps — tuned to where the v1 run's val loss actually peaked (see
+`train_full.log`, where 4000 unregularized steps ended in memorization).
 
 Debug-small first, scale after: a 1-minute feedback loop finds bugs that would
 otherwise appear 90 minutes into the big run.
