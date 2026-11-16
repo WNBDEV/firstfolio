@@ -24,6 +24,11 @@ comfortably while the desktop is running.
    Every function is one plain-English sentence: "look back and blend",
    "digest", "put a probability on each of 65 characters". The proof that
    inference is just matrix math.
+6. **`attention_map.py`** — X-rays for the trained model. Inference normally
+   throws the attention tables away the instant they're used; this keeps them
+   and draws them, so you can *see* each head's "who should I listen to?"
+   decision — the head that snaps to the last newline when a speaker line
+   starts, the ones tracking spelling, the long-range lookers.
 
 ## Running it
 
@@ -37,12 +42,20 @@ cd ~/Projects/firstfolio
 .venv/bin/python prepare.py                # download + tokenize (once)
 .venv/bin/python train.py --preset debug   # ~74k params, ~1 min — sanity check
 .venv/bin/python sample.py --preset debug  # char soup (expected!) — pipeline works
-.venv/bin/python train.py --preset full    # ~10.7M params, ~2 h — the real run
+.venv/bin/python train.py --preset full    # ~10.7M params, ~40 min — the real run
 .venv/bin/python sample.py --preset full --prompt "ROMEO:" --max-new-tokens 800
 
 # the model with NO torch at all (pure numpy — see numpy_infer.py):
 .venv/bin/python export_weights.py         # one-time: copy weights out of the checkpoint
 .venv/bin/python numpy_infer.py --prompt "ROMEO:" --show-probs
+
+# generation runs through a KV cache — ~6x faster, byte-identical output.
+# --no-cache re-reads the whole context every character; run both to feel the difference.
+.venv/bin/python numpy_infer.py --max-new-tokens 300
+
+# watch the attention heads think (no torch needed):
+.venv/bin/python attention_map.py --prompt "\nROMEO:"
+.venv/bin/python attention_map.py --prompt "\nROMEO:" --head 4 --grid
 ```
 
 Interrupted training? `python train.py --preset full --resume` continues from
