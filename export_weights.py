@@ -45,4 +45,4 @@ np.savez(os.path.join(HERE, "firstfolio_weights.npz"), **out)
 
 cfg_keys = {"n_layer", "n_head", "n_embd", "block_size", "vocab_size"}
 total = sum(v.size for k, v in out.items() if k not in cfg_keys and k != "chars")
-print(f"wrote tiny_gpt_weights.npz | {total/1e6:.2f}M parameters copied | torch officially done")
+print(f"wrote firstfolio_weights.npz | {total/1e6:.2f}M parameters copied | torch officially done")
