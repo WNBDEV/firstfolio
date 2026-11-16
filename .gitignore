@@ -1,0 +1,15 @@
+# environment (recreate: uv venv + pip install torch)
+.venv/
+__pycache__/
+
+# data (recreate: prepare.py)
+data/
+
+# training artifacts (recreate: train.py)
+*.pt
+
+# numpy export (recreate: export_weights.py)
+*.npz
+
+# setup junk
+torch_install.log

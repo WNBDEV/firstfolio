@@ -1,0 +1,65 @@
+device: NVIDIA GeForce GTX 960 (sm_52) | torch 2.7.1+cu126 | fp32 training (Maxwell: no bf16, fp16 compute unusable)
+model: 10.65M non-embedding params (10.75M incl. embeddings) | effective batch = 12 x 5 = 60 seqs of 256 tokens
+VRAM: 1.54 GiB free / 1.94 GiB total
+[eval ] iter     0 | train 4.2831 | val 4.2804
+[best ] val improved -> saved ckpt_full.pt
+[train] iter   100 | loss 2.430 | lr 1.00e-03 | 956 ms/iter
+[train] iter   200 | loss 2.041 | lr 9.99e-04 | 1003 ms/iter
+[eval ] iter   250 | train 1.8144 | val 1.9454
+[best ] val improved -> saved ckpt_full.pt
+[train] iter   300 | loss 1.725 | lr 9.94e-04 | 1477 ms/iter
+[train] iter   400 | loss 1.517 | lr 9.87e-04 | 1509 ms/iter
+[eval ] iter   500 | train 1.3786 | val 1.6054
+[best ] val improved -> saved ckpt_full.pt
+[train] iter   500 | loss 1.421 | lr 9.77e-04 | 1557 ms/iter
+[train] iter   600 | loss 1.357 | lr 9.64e-04 | 1578 ms/iter
+[train] iter   700 | loss 1.243 | lr 9.48e-04 | 1649 ms/iter
+[eval ] iter   750 | train 1.2491 | val 1.5447
+[best ] val improved -> saved ckpt_full.pt
+[train] iter   800 | loss 1.215 | lr 9.30e-04 | 1648 ms/iter
+[train] iter   900 | loss 1.215 | lr 9.10e-04 | 1560 ms/iter
+[eval ] iter  1000 | train 1.1420 | val 1.5289
+[best ] val improved -> saved ckpt_full.pt
+[train] iter  1000 | loss 1.136 | lr 8.87e-04 | 1616 ms/iter
+[train] iter  1100 | loss 1.090 | lr 8.62e-04 | 1569 ms/iter
+[train] iter  1200 | loss 1.003 | lr 8.35e-04 | 1587 ms/iter
+[eval ] iter  1250 | train 0.9963 | val 1.6463
+[train] iter  1300 | loss 0.968 | lr 8.06e-04 | 1635 ms/iter
+[train] iter  1400 | loss 0.902 | lr 7.75e-04 | 1547 ms/iter
+[eval ] iter  1500 | train 0.8091 | val 1.7801
+[train] iter  1500 | loss 0.786 | lr 7.43e-04 | 1577 ms/iter
+[train] iter  1600 | loss 0.738 | lr 7.10e-04 | 1537 ms/iter
+[train] iter  1700 | loss 0.629 | lr 6.75e-04 | 1537 ms/iter
+[eval ] iter  1750 | train 0.6458 | val 2.0102
+[train] iter  1800 | loss 0.603 | lr 6.40e-04 | 1610 ms/iter
+[train] iter  1900 | loss 0.541 | lr 6.04e-04 | 1583 ms/iter
+[eval ] iter  2000 | train 0.4502 | val 2.3403
+[train] iter  2000 | loss 0.412 | lr 5.68e-04 | 1628 ms/iter
+[train] iter  2100 | loss 0.407 | lr 5.32e-04 | 1520 ms/iter
+[train] iter  2200 | loss 0.339 | lr 4.96e-04 | 1552 ms/iter
+[eval ] iter  2250 | train 0.3245 | val 2.6427
+[train] iter  2300 | loss 0.287 | lr 4.60e-04 | 1590 ms/iter
+[train] iter  2400 | loss 0.250 | lr 4.25e-04 | 1545 ms/iter
+[eval ] iter  2500 | train 0.2257 | val 3.0141
+[train] iter  2500 | loss 0.222 | lr 3.90e-04 | 1588 ms/iter
+[train] iter  2600 | loss 0.199 | lr 3.57e-04 | 1547 ms/iter
+[train] iter  2700 | loss 0.196 | lr 3.25e-04 | 1536 ms/iter
+[eval ] iter  2750 | train 0.1765 | val 3.2112
+[train] iter  2800 | loss 0.166 | lr 2.94e-04 | 1563 ms/iter
+[train] iter  2900 | loss 0.146 | lr 2.65e-04 | 1575 ms/iter
+[eval ] iter  3000 | train 0.1430 | val 3.4907
+[train] iter  3000 | loss 0.147 | lr 2.38e-04 | 1577 ms/iter
+[train] iter  3100 | loss 0.127 | lr 2.13e-04 | 1542 ms/iter
+[train] iter  3200 | loss 0.127 | lr 1.90e-04 | 1536 ms/iter
+[eval ] iter  3250 | train 0.1205 | val 3.6931
+[train] iter  3300 | loss 0.123 | lr 1.70e-04 | 1563 ms/iter
+[train] iter  3400 | loss 0.121 | lr 1.52e-04 | 1526 ms/iter
+[eval ] iter  3500 | train 0.1123 | val 3.7921
+[train] iter  3500 | loss 0.110 | lr 1.36e-04 | 1550 ms/iter
+[train] iter  3600 | loss 0.112 | lr 1.23e-04 | 1499 ms/iter
+[train] iter  3700 | loss 0.104 | lr 1.13e-04 | 1496 ms/iter
+[eval ] iter  3750 | train 0.1048 | val 3.8883
+[train] iter  3800 | loss 0.101 | lr 1.06e-04 | 1534 ms/iter
+[train] iter  3900 | loss 0.108 | lr 1.01e-04 | 1367 ms/iter
+training done at iter 4000 | best val loss 1.5289
+best checkpoint: /home/gamer/Projects/tiny-gpt/ckpt_full.pt
